@@ -34,7 +34,7 @@ chroma = librosa.feature.chroma_stft(S=S, sr=sr)
 
 import matplotlib.pyplot as plt
 plt.figure(figsize=(10, 4))
-librosa.display.specshow(chroma, y_axis='chroma', x_axis='time')
+librosa.display.specshow(chroma, y_axis='chroma', x_axis='s')
 plt.colorbar()
 plt.title('Chromagram')
 plt.tight_layout()
