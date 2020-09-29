@@ -37,10 +37,10 @@ print(X_final)
 # plt.show()
 
 #HIERARCHICAL AGGLOMETRIC CLUSTERING
-plt.figure(figsize=(10, 7))  
-plt.title("Dendrograms")  
-dend = shc.dendrogram(shc.linkage(X_final, method='ward'))
-plt.show()
+# plt.figure(figsize=(10, 7))  
+# plt.title("Dendrograms")  
+# dend = shc.dendrogram(shc.linkage(X_final, method='ward'))
+# plt.show()
 
 cluster = AgglomerativeClustering(n_clusters=3, affinity='euclidean', linkage='ward')  
 cluster.fit_predict(X_final)

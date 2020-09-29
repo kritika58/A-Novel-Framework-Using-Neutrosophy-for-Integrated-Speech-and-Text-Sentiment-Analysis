@@ -1,7 +1,8 @@
 import librosa
 import librosa.display
-import matplotlib as plt
+import matplotlib.pyplot as plt
 import numpy as np
+plt.rcParams.update({'font.size': 16})
 y, sr = librosa.load(librosa.util.example_audio_file())
 # librosa.feature.chroma_stft(y=y, sr=sr)
 # # array([[ 0.974,  0.881, ...,  0.925,  1.   ],
@@ -32,10 +33,10 @@ chroma = librosa.feature.chroma_stft(S=S, sr=sr)
 # [ 0.844,  0.575, ...,  0.934,  0.869],
 # [ 0.793,  0.663, ...,  0.964,  0.972]])
 
-import matplotlib.pyplot as plt
-plt.figure(figsize=(10, 4))
+plt.figure(figsize=(15, 6))
 librosa.display.specshow(chroma, y_axis='chroma', x_axis='s')
 plt.colorbar()
-plt.title('Chromagram')
+plt.ylabel('Pitch Class',fontsize=28)
+plt.xlabel('Time (s)',fontsize=28)
 plt.tight_layout()
 plt.show()
