@@ -1,3 +1,5 @@
+#Feature extraction code for the entire dataset library
+
 import glob  
 import os  
 import librosa  
@@ -35,11 +37,11 @@ def parse_audio_files(parent_dir,sub_dirs,file_ext="*.wav"):
                 features = np.vstack([features,ext_features])
     return np.array(features)
 
-main_dir = "C:\\Users\\lenovo\\Desktop\\FINAL PROJECT\\LibriSpeech\\dev-clean\\"
+main_dir = "DATASET\\LibriSpeech\\dev-clean\\"
 sub_dirs=os.listdir(main_dir)  
 print(sub_dirs)
 print ("\ncollecting features and labels...")  
 print("\nthis will take some time...")  
 features = parse_audio_files(main_dir,sub_dirs)  
 print("done features")  
-np.save('dev_clean_features',features)  
+np.save('output\\X_dev',features)  
