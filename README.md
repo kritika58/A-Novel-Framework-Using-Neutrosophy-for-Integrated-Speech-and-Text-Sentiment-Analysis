@@ -10,18 +10,13 @@ With increasing data on the Internet, it is becoming difficult to analyze every 
 Having worked on NLP projects earlier, I was sure that I would like to choose a topic from this domain and work on it for my final year project. Sentiment analysis is a very topic with a wide range of applications in the present day. Hence I included the concept of neutrosophy coupling it with speech analysis because the trend of voice integration has resulted in a surplus amount of data inform of audio files.
 
 #### Task 2: Selecting a dataset
-Dataset played a crucial role in this project. The reason being I wanted to map audio SVNS to text SVNS for comparison so a dataset with audio translation was required. Hence LibriSpeech dataset was picked. For the demonstration of this project the following two folders were used:
-    - Dev-clean (337 MB)
-    - Train-clean-100 (6.3 GB)
+Dataset played a crucial role in this project. The reason being I wanted to map audio SVNS to text SVNS for comparison so a dataset with audio translation was required. Hence LibriSpeech dataset was picked. For the demonstration of this project the following two folders were used: Dev-clean (337 MB) and Train-clean-100 (6.3 GB)
     
 #### Task 3: Processing audios from .flac to .wav
 The dataset was available in .flac format. It was necessary to convert these files into .wav format for further processing and extracting features. For this ffmpeg was used in shell script with bash. FFmpeg is a free and open-source project consisting of a vast software suite of libraries and programs for handling video, audio, and other multimedia files and streams.
 
 #### Task 4: Extracting Features and Preprocessing
-The audio files were then fed into the python feature extraction script which extracted 193 features per audio file. The following npy files were generated as result:
-    - X_dev.npy (2703 x 193)
-    - X_train.npy (28539 x 193)
-Then these files were normalized using sklearn. 
+The audio files were then fed into the python feature extraction script which extracted 193 features per audio file. The following npy files were generated as result: X_dev.npy (2703 x 193) and X_train.npy (28539 x 193). Then these files were normalized using sklearn. 
 
 #### Task 5: Generating audio SVNS
 Since the dataset was unlabeled, K means algorithm was used for clustering. With K being set to 3, the clusters were obtained. Let the cluster centres be A, B and C. For every data point P in the dataset distance was calculated to the centres of each cluster. 1-distance implied the closeness measure to each cluster or class (positive, neutral or negative). This is how SVNS were created and stored in a csv file.
@@ -33,14 +28,7 @@ VADER is a tool used for sentiment analysis which provides a measure for positiv
 Taking the csv file of text SVNS as input, K means cluster with K being as 3 was performed.
 
 #### Task 8: Combining the SVNS
-Audio SVNS: <PA, IA, NA>
-Text SVNS: <PT, IT, NT>
-Combined SVNS: <PC, IC, NC>
-Where,
-PC = (PT + PA)/2
-IC = (IT + IA)/2
-NC = (NT + NA)/2
-This is how the SVNS were combined.
+Audio SVNS- <PA, IA, NA>; Text SVNS- <PT, IT, NT>; Combined SVNS- <PC, IC, NC>; where, PC = (PT + PA)/2, IC = (IT + IA)/2 and NC = (NT + NA)/2. This is how the SVNS were combined.
 
 #### Task 9: Visualization of combined SVNS
 Using K means clustering and hierarchical agglomerative clustering algorithms, the SVNS were visualized into 3 clusters.
