@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn import preprocessing
 import scipy.cluster.hierarchy as shc
+from sklearn.cluster import AgglomerativeClustering
 
 data = np.load('X.npy')
 X= pd.DataFrame(data)
@@ -17,7 +18,6 @@ plt.title("Dendrograms")
 dend = shc.dendrogram(shc.linkage(X, method='ward'))
 plt.axhline(y=3.5, color='black', linestyle='--')
 
-from sklearn.cluster import AgglomerativeClustering
 cluster = AgglomerativeClustering(n_clusters=3, affinity='euclidean', linkage='ward')  
 cluster.fit_predict(X)
 

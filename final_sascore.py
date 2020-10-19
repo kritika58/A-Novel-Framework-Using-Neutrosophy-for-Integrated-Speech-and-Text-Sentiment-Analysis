@@ -1,3 +1,4 @@
+#import packages
 import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt
@@ -9,6 +10,7 @@ import seaborn as sns
 import scipy.cluster.hierarchy as shc
 from sklearn.cluster import AgglomerativeClustering
 
+#combine audio SVNS and text SVNS
 X_text= pd.read_csv('vader_train.csv')
 X_audio= pd.read_csv('train_audio_svns.csv')
 X_final=pd.DataFrame() 
@@ -20,27 +22,27 @@ print(X_audio.info())
 print(X_final)
 
 #KMMEANS CLUSTERING
-# kmeans = KMeans(n_clusters=3, init='k-means++', max_iter=500, n_init=10, random_state=0)
-# kmeans.fit(X_final)
-# y_kmeans = kmeans.predict(X_final)
-# print(y_kmeans)
+kmeans = KMeans(n_clusters=3, init='k-means++', max_iter=500, n_init=10, random_state=0)
+kmeans.fit(X_final)
+y_kmeans = kmeans.predict(X_final)
+print(y_kmeans)
 
-# y= y_kmeans.reshape((len(y_kmeans),1))
-# y=np.around(y, decimals=0)
-# np.savetxt("combined_train_svns.csv", np.concatenate((X_final,y),axis=1), delimiter=",", fmt='%.3f')
+y= y_kmeans.reshape((len(y_kmeans),1))
+y=np.around(y, decimals=0)
+np.savetxt("combined_train_svns.csv", np.concatenate((X_final,y),axis=1), delimiter=",", fmt='%.3f')
 
-# fig = plt.figure()
-# ax = plt.axes(projection='3d')
-# ax.scatter3D(X_final['C1'],X_final['C2'],X_final['C3'], c=y_kmeans, s=50, cmap='viridis')
-# centers = kmeans.cluster_centers_
-# ax.scatter3D(centers[:, 0], centers[:, 1], centers[:, 2], c='black', s=200, alpha=0.5)
-# plt.show()
+fig = plt.figure()
+ax = plt.axes(projection='3d')
+ax.scatter3D(X_final['C1'],X_final['C2'],X_final['C3'], c=y_kmeans, s=50, cmap='viridis')
+centers = kmeans.cluster_centers_
+ax.scatter3D(centers[:, 0], centers[:, 1], centers[:, 2], c='black', s=200, alpha=0.5)
+plt.show()
 
 #HIERARCHICAL AGGLOMETRIC CLUSTERING
-# plt.figure(figsize=(10, 7))  
-# plt.title("Dendrograms")  
-# dend = shc.dendrogram(shc.linkage(X_final, method='ward'))
-# plt.show()
+plt.figure(figsize=(10, 7))  
+plt.title("Dendrograms")  
+dend = shc.dendrogram(shc.linkage(X_final, method='ward'))
+plt.show()
 
 cluster = AgglomerativeClustering(n_clusters=3, affinity='euclidean', linkage='ward')  
 cluster.fit_predict(X_final)

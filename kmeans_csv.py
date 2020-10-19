@@ -8,19 +8,19 @@ from sklearn import preprocessing
 from mpl_toolkits import mplot3d
 import seaborn as sns
 
-X= pd.read_csv('vader_train.csv')
+X= pd.read_csv('vader_dev.csv')
 print(X)
 
-# plt.figure(1)
-# wcss = []
-# for i in range(1, 11):
-#     kmeans = KMeans(n_clusters=i, init='k-means++', max_iter=500, n_init=10, random_state=0)
-#     kmeans.fit(X)
-#     wcss.append(kmeans.inertia_)
-# plt.plot(range(1, 11), wcss)
-# plt.title('Elbow Method')
-# plt.xlabel('Number of clusters')
-# plt.ylabel('WCSS')
+plt.figure(1)
+wcss = []
+for i in range(1, 11):
+    kmeans = KMeans(n_clusters=i, init='k-means++', max_iter=500, n_init=10, random_state=0)
+    kmeans.fit(X)
+    wcss.append(kmeans.inertia_)
+plt.plot(range(1, 11), wcss)
+plt.title('Elbow Method')
+plt.xlabel('Number of clusters')
+plt.ylabel('WCSS')
 
 
 kmeans = KMeans(n_clusters=3, init='k-means++', max_iter=500, n_init=10, random_state=0)
@@ -28,7 +28,7 @@ kmeans.fit(X)
 y_kmeans = kmeans.predict(X)
 print(y_kmeans)
 
-np.savetxt("Y_vader_train.csv", y_kmeans)
+np.savetxt("Y_vader_dev.csv", y_kmeans)
 
 plt.figure(1)
 plt.style.use('ggplot')
